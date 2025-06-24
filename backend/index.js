@@ -4,7 +4,6 @@
 import "./configs/loadEnv.configs.js";
 import app from "./app/app.js";
 import { connectDB } from "./configs/db.configs.js";
-import { fetchJobs } from "./app/utils/jobParser.utils.js";
 const port = process.env.PORT || 8000;
 
 /**
@@ -37,5 +36,3 @@ process.on("unhandledRejection", (reason, promise) => {
     process.exit(1);
   }
 })();
-
-// fetchJobs();

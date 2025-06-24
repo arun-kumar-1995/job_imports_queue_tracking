@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const schema = new Schema(
   {
-    link: {
+    api_url: {
       type: String,
       trim: true,
     },
