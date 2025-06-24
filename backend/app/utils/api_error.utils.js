@@ -1,11 +1,12 @@
 import { Errors } from "../constants/errors_type.constants.js";
 
-export class APIError extends Error {
-  constructor(http, message) {
-    super(message);
-    const { code, status } = http;
-    this.statusCode = code;
-    this.status = status;
-    this.errorCode = Errors.CLIENT_ERROR;
-  }
-}
+export const APIError = (res, http, message) => {
+  const { code, status } = http;
+  return res.status(code).json({
+    success: false,
+    message,
+    httpCode: code,
+    status,
+    errorCode: Errors.CLIENT_ERROR,
+  });
+};

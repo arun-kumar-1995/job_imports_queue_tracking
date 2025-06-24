@@ -29,11 +29,11 @@ process.on("unhandledRejection", (reason, promise) => {
     await connectDB();
 
     // connect redis
-    // await connectRedis();
+    await connectRedis();
     
     // start the express server
     app.listen(port, () => {
-      console.log(`Server started \n ${process.env.APP_HOST}:${port}`);
+      console.log(`Server started : ${process.env.APP_HOST}:${port}`);
     });
   } catch (err) {
     console.log("Error Starting Server");

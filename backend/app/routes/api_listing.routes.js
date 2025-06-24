@@ -1,4 +1,7 @@
-import {Router} from "express";
+import { Router } from "express";
+import { addAPIUrl } from "../controllers/api_listing.controller.js";
 const router = Router();
 
-router.route("/").post("add-api-url");
+router.route("/add-api-url").post(addAPIUrl);
+
+export default router;

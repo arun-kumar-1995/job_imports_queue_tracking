@@ -14,6 +14,7 @@ dotenv.config();
     "DB_NAME",
     "REDIS_HOST",
     "REDIS_PORT",
+    "REDIS_PREFIX"
   ];
 
   const missingEnv = EnvVariables.filter((key) => !process.env[key]);
