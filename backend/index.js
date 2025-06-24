@@ -4,6 +4,7 @@
 import "./configs/loadEnv.configs.js";
 import app from "./app/app.js";
 import { connectDB } from "./configs/db.configs.js";
+import { connectRedis } from "./configs/redis.configs.js";
 const port = process.env.PORT || 8000;
 
 /**
@@ -27,6 +28,9 @@ process.on("unhandledRejection", (reason, promise) => {
     // connect the databse
     await connectDB();
 
+    // connect redis
+    // await connectRedis();
+    
     // start the express server
     app.listen(port, () => {
       console.log(`Server started \n ${process.env.APP_HOST}:${port}`);

@@ -1,6 +1,7 @@
 import { HttpCodes } from "../constants/http_codes.constants.js";
 import { APILists } from "../models/api_listing.models.js";
 import { APIError } from "../utils/api_error.utils.js";
+import { redisClient } from "../../configs/redis.configs.js";
 
 export const addAPIUrl = async (req, res, next) => {
   try {
