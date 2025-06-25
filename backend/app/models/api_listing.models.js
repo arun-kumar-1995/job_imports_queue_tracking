@@ -10,4 +10,4 @@ const schema = new Schema(
   { timestamps: true }
 );
 
-export const APILists = model("APIList", schema);
+export const APILists = model("api_lists", schema);

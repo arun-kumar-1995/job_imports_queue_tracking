@@ -2,7 +2,9 @@ import redis from "redis";
 export const redisClient = redis.createClient({
   socket: {
     host: process.env.REDIS_HOST,
-    port: Number(process.env.REDIS_PORT)
+    port: Number(process.env.REDIS_PORT),
+    connectTimeout: 10000,
+    commandTimeout: 8000,
   },
 });
 
@@ -12,7 +14,7 @@ redisClient.on("error", (err) => {
 });
 
 redisClient.on("ready", () => {
- const { host, port } = redisClient.options.socket;
+  const { host, port } = redisClient.options.socket;
   console.log(`Redis connected : ${host}:${port}`);
 });
 

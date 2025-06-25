@@ -3,6 +3,7 @@ import { APILists } from "../models/api_listing.models.js";
 import { APIError } from "../utils/api_error.utils.js";
 import { redisClient } from "../../configs/redis.configs.js";
 import { APIResponse } from "../utils/api_response.utils.js";
+import { RedisKeys } from "../constants/redis.constants.js";
 
 export const addAPIUrl = async (req, res, next) => {
   try {
@@ -10,11 +11,8 @@ export const addAPIUrl = async (req, res, next) => {
     if (!api_url)
       return APIError(res, HttpCodes.BAD_REQUEST, "API Url is required");
 
-    // define redis cashed for api url
-    const cachedAPIUrl = `${process.env.REDIS_PREFIX}:api_lists`;
-
     // check for cachedAPIurl
-    const apiUrl = await redisClient.SISMEMBER(cachedAPIUrl, api_url);
+    const apiUrl = await redisClient.HGET(RedisKeys.API_LISTS, api_url);
     if (apiUrl)
       return APIError(
         res,
@@ -23,8 +21,8 @@ export const addAPIUrl = async (req, res, next) => {
       );
 
     // create api and perform caching
-    await APILists.create({ api_url });
-    await redisClient.SADD(cachedAPIUrl, api_url);
+    const apiDoc = await APILists.create({ api_url });
+    await redisClient.HSET(RedisKeys.API_LISTS, api_url , apiDoc._id.toString());
 
     // return api response
     return APIResponse(res, HttpCodes.CREATED, "API Url inserted");

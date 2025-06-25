@@ -1,8 +1,17 @@
-import { Schema, model } from "models";
+import { Schema, model } from "mongoose";
 const schema = new Schema(
   {
     import_date: {
       type: Date,
+    },
+    file_name: {
+      type: String,
+      required: true,
+    },
+    api_id: {
+      type: Schema.Types.ObjectId,
+      ref: "APIList",
+      required: true,
     },
     total: {
       type: Number,
@@ -28,4 +37,4 @@ const schema = new Schema(
   },
   { timestamps: true }
 );
-export const ImportLogs = model("ImportLog", schema);
+export const ImportLogs = model("import_log", schema);

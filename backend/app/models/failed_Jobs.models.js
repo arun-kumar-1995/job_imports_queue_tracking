@@ -18,4 +18,4 @@ const schema = new Schema(
   { timestamps: true }
 );
 
-export const FailedJobs = model("FailedJobs", schema);
+export const FailedJobs = model("failed_job", schema);
