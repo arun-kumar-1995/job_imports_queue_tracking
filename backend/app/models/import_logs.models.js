@@ -12,6 +12,7 @@ const schema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "APIList",
       required: true,
+      index: true,
     },
     total: {
       type: Number,
@@ -37,4 +38,5 @@ const schema = new Schema(
   },
   { timestamps: true }
 );
+
 export const ImportLogs = model("import_log", schema);

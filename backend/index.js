@@ -30,7 +30,7 @@ process.on("unhandledRejection", (reason, promise) => {
 
     // connect redis
     await connectRedis();
-    
+
     // start the express server
     app.listen(port, () => {
       console.log(`Server started : ${process.env.APP_HOST}:${port}`);

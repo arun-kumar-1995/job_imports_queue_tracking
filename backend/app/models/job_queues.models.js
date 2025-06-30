@@ -5,9 +5,11 @@ const schema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "APIList",
       required: true,
+      index: true,
     },
     job_id: {
       type: Number,
+      index: true,
     },
     status: {
       type: String,
@@ -16,9 +18,6 @@ const schema = new Schema(
   },
   { timestamps: true }
 );
-
-/** define index **/
-schema.index({ job_id: 1 });
 
 /**import model **/
 export const JobQueues = model("job_queue", schema);
