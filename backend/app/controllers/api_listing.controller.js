@@ -5,6 +5,7 @@ import { redisClient } from "../../configs/redis.configs.js";
 import { APIResponse } from "../utils/api_response.utils.js";
 import { RedisKeys } from "../constants/redis.constants.js";
 import { CronJobs } from "../models/cron_jobs.models.js";
+import { ImportLogs } from "../models/import_logs.models.js";
 
 export const addAPIUrl = async (req, res, next) => {
   try {
@@ -58,5 +59,14 @@ export const addCronJob = async (req, res, next) => {
     return APIResponse(res, HttpCodes.OK, "Cron registered");
   } catch (err) {
     return next(err);
+  }
+};
+
+export const importLogs = async (req, res, next) => {
+  try {
+    const importLogs = await ImportLogs.find({}).sort({ _id: -1 });
+    return APIResponse(res, HttpCodes.OK, "Here are the logs", { importLogs });
+  } catch (err) {
+    next(err);
   }
 };
